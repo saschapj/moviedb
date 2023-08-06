@@ -24,7 +24,7 @@ const Home = () => {
   }
 
 
-/*options here*/
+//options here
   
   const getMoviesFromApi = (id) => {
     fetch(`https://api.themoviedb.org/3/movie/${id}`, options)
@@ -36,8 +36,7 @@ const Home = () => {
       })
       .catch(err => console.error(err));  
 
-      //setMoviesFromApi((movie)=>[...movie,tempMoviesFromApi])
-      
+  
   }
   
 
@@ -59,14 +58,14 @@ const Home = () => {
     
   return (    
     <div>
-      {moviesFromApi.map((movie)=>{
-        return (    
+      
+          
         <div>   
           
-          <Movie title={movie.title} img={movie.backdrop_path} moviesFromDb={moviesFromDb} getMoviesFromApi={getMoviesFromApi}/>
+          <Movie  moviesFromDb={moviesFromDb} moviesFromApi={moviesFromApi}/>
         </div>
-        )
-      })}
+        
+      
     </div>
   )
 }
