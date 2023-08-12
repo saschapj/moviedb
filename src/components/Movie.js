@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-const Movie = ({title,img,moviesFromApi}) => {
+const Movie = ({moviesFromApi}) => {
 
 
-  
-
-  
   return (
     <ul className='flex'>
     {  moviesFromApi.map((movie)=>{
-      console.log(moviesFromApi)
+      
       return (
         <li className='px-2' key={movie.id}>
+          <Link to={`/movie/${movie.id}`}>
         <img src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}/>
-        <div>{movie.title}</div>
+        <div className='text-xl font-bold'>{movie.title}</div>
+        </Link>
         </li>
         )
       })}
-    <div className=''>{title}</div>    
+   
     </ul>
   )
 }

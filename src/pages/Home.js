@@ -25,6 +25,7 @@ const Home = () => {
 
 
 //options here
+
   
   const getMoviesFromApi = (id) => {
     fetch(`https://api.themoviedb.org/3/movie/${id}`, options)
@@ -40,32 +41,24 @@ const Home = () => {
   }
   
 
-
   useEffect(()=>{
     getMovies();         
         
   },[])
-  
-  console.log(moviesFromDb)
 
   useEffect(()=> {
 
     moviesFromDb.map((movie)=>{
-      console.log(movie)
+      
       getMoviesFromApi(movie.tmdbid)
     })
   },[moviesFromDb])
     
   return (    
     <div>
-      
-          
         <div>   
-          
-          <Movie  moviesFromDb={moviesFromDb} moviesFromApi={moviesFromApi}/>
+          <Movie  moviesFromDb={moviesFromDb} moviesFromApi={moviesFromApi} getMoviesFromApi={()=>{getMoviesFromApi()}}/>
         </div>
-        
-      
     </div>
   )
 }
