@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
     const [movies,setMovies] = useState([2]);
     const [searchTitle,setSearchTitle] = useState("");
+    const [inputFocus,setInputFocus] = useState(false);
+    
 
         //options here
 
@@ -35,19 +38,24 @@ useEffect(()=>{
         </div>
 
         <div >            
-            <input className='text-black' placeholder='search...' onChange={(e)=>{
+            <input onFocus={()=>{setInputFocus(true)}} onBlur={()=>{setTimeout(()=>{setInputFocus(false)},1000)}} className='text-black' placeholder='suchen...' onChange={(e)=>{
                 setSearchTitle(e.target.value)
                 
                 }}/>
-            <ul className='text-black bg-gray-100 w-full absolute'>
+
+            {inputFocus&&
+
+                <ul className='text-black bg-gray-100 w-full absolute'>
+          
             {movies.map((movie)=>{
                 return(
                     
-                    <li key={movie.id} className='hover:bg-gray-300 cursor-pointer'>{movie.title}</li>
-                )
-            })}
+                    <li key={movie.id} className='hover:bg-gray-300 cursor-pointer'><Link to={`/movie/${movie.id}`}>{movie.title}</Link> </li>
+                    )
+                })}
             
             </ul>            
+            }
         </div>
     </div>
   )

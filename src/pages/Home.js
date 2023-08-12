@@ -57,8 +57,10 @@ const Home = () => {
   return (    
     <div>
         <div>   
-          <Movie  moviesFromDb={moviesFromDb} moviesFromApi={moviesFromApi} getMoviesFromApi={()=>{getMoviesFromApi()}}/>
+          <Movie moviesFromApi={moviesFromApi} getMoviesFromApi={()=>{getMoviesFromApi()}}/>
         </div>
+
+        
     </div>
   )
 }
