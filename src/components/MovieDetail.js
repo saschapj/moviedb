@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { collection, getDocs } from "firebase/firestore"; 
+import { addDoc, collection, getDocs } from "firebase/firestore"; 
 import {db} from "../Firebase/Firebase-config"
 import { FaPlus } from 'react-icons/fa';
 
@@ -13,7 +13,6 @@ const MovieDetail = () => {
     
     //options here
 
-    
   
   const imageURL =`https://image.tmdb.org/t/p/original${movie.backdrop_path}`
   
@@ -29,26 +28,40 @@ const MovieDetail = () => {
         
     }
     
-    useEffect(()=>{
+    useEffect(()=>{      
       getMoviesFromApi(id);
+    },[id])
+    
+    useEffect(()=>{      
       getOwnMovies();
-    },[movie,id])
-      
+
+    },[movie])
     
     
     const getOwnMovies = async () =>{
       const querySnapshot = await getDocs(collection(db, "movies"));      
+      let movieOwned = false;
         querySnapshot.forEach((doc) => {
           
-            if(movie.id==doc.data().tmdbid) {
-
-              setOwnMovie(true);
-            } else{
-              setOwnMovie(false);
-            }
-        });            
+            if(movie.id==doc.data().tmdbid) {        
+              movieOwned=true;
+              
+            } 
+        });
+        setOwnMovie(movieOwned)
     }        
     
+    const addMovie = async (tmdbid) => {        
+      try {
+          const docRef = await addDoc(collection(db, "movies"), {
+              tmdbid: tmdbid,
+          });
+          console.log(`Document written with ID: ${tmdbid}`);
+          setOwnMovie(true);
+      } catch (e) {
+      console.error("Error adding document: ", e);
+  }
+}
 
       return (
         
@@ -59,11 +72,10 @@ const MovieDetail = () => {
          <h1 className='text-4xl font-bold '>{`${movie?.title} ${movie.release_date?.split("-")[0]}`}</h1>
          
          {
-           ownMovie?
-           
+           ownMovie?           
            <button onClick={()=>{setOwnMovie(!ownMovie)}} className='p-4 m-2 flex border-2 min-w-[13rem] border-white text-black bg-white uppercase  hover:cursor-pointer'>{<FaPlus className=' pr-2 text-2xl '/>}Film im Besitz</button>
            :
-           <button onClick={()=>{setOwnMovie(!ownMovie)}} className='p-4 m-2 flex border-2 min-w-[13rem] uppercase   hover:cursor-pointer'>{<FaPlus className='pr-2 text-2xl  '/>}Film Hinzufügen</button>                      
+           <button onClick={()=>{addMovie(movie.id)}} className='p-4 m-2 flex border-2 min-w-[13rem] uppercase   hover:cursor-pointer'>{<FaPlus className='pr-2 text-2xl  '/>}Film Hinzufügen</button>                      
            
          }
 
