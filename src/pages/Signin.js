@@ -53,14 +53,18 @@ const Signin = () => {
 
   return (
 
-    <div>Signin {user?.email}
+    <div >
         
-        <input type="text" placeholder='email...' onChange={(e)=>{setEmail(e.target.value)}}/>
-        <input type="password" placeholder='password...' onChange={(e)=>{setPassword(e.target.value)}}/>
-        <button onClick={() => {signin()}}>Sign in</button>
-        <button onClick={()=>{signout()}}>Sign Out</button>
+        <input className='bg-black placeholder-white text-2xl border-dashed border-white border-2 mx-2' type="text" placeholder='email...' onChange={(e)=>{setEmail(e.target.value)}}/>
+        <input className='bg-black placeholder-white text-2xl border-dashed border-white border-2 mx-2' type="password" placeholder='password...' onChange={(e)=>{setPassword(e.target.value)}}/>
+        <button className="hover:text-black hover:bg-white text-white bg-black border-2 p-4 m-4 min-w-[8rem] " onClick={() => {signin()}}>Sign in</button>
+        <button className="hover:text-black hover:bg-white text-white bg-black border-2 p-4 m-4 min-w-[8rem] " onClick={()=>{signout()}}>Sign Out</button>
     </div>
   )
 }
 
 export default Signin
+
+//<ul className='px-4 flex text-white text-2xl mb-8 items-center'>
+//<li onClick={((e)=>{setActiveLink(e.target.text)})} className={`px-4 py-8 ${activeLink==='Home'&&'text-black bg-white'}`}><Link to="/">Home</Link></li>
+//<li onClick={((e)=>{setActiveLink(e.target.text)})} className={`px-4 py-8 ${activeLink==='Login'&&'text-black bg-white'}`}><Link to="/signin">Login</Link></li>

@@ -1,16 +1,34 @@
 import React, { useState } from 'react'
 import { collection, getDocs } from "firebase/firestore"; 
 import { useEffect } from 'react';
-import {db} from "../Firebase/Firebase-config"
+import {auth, db} from "../Firebase/Firebase-config"
 import Movie from '../components/Movie';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 const Home = () => {
 
   const [moviesFromDb,setMoviesFromDb] = useState([]);
   const [moviesFromApi,setMoviesFromApi] = useState([]);
+  const [user,setUser] = useState({})
   
-  
+  useEffect(()=>{
+
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        console.log(uid)
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  })
+
   const getMovies = async () =>{
 
     const querySnapshot = await getDocs(collection(db, "movies"));    

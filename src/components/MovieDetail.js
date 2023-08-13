@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore"; 
-import {db} from "../Firebase/Firebase-config"
+import {auth, db} from "../Firebase/Firebase-config"
 import { FaPlus } from 'react-icons/fa';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const MovieDetail = () => {
     const {id} = useParams();
@@ -10,8 +11,26 @@ const MovieDetail = () => {
     const [movie,setMovie] = useState([]);
     const [ownMovie,setOwnMovie] = useState(false);
     const [ownMovieId,setOwnMovieId] = useState(-1);
+    const [user,setUser] = useState({})
     
-    
+    useEffect(()=>{
+
+      onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/auth.user
+          const uid = user.uid;
+          console.log(uid)
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
+    })
+
+
     //options here
 
     
