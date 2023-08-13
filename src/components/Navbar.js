@@ -7,6 +7,7 @@ const Navbar = () => {
     const [movies,setMovies] = useState([2]);
     const [searchTitle,setSearchTitle] = useState("");
     const [inputFocus,setInputFocus] = useState(false);
+    const [activeLink,setActiveLink] = useState('Home');
     
 
         //options here
@@ -27,14 +28,18 @@ useEffect(()=>{
     console.log(movies)
 },[searchTitle])
 
+useEffect(()=>{    
+    
+    console.log(activeLink)
+},[activeLink])
+
   return (
     <div className='w-full  flex justify-between'>
         
         
-        <ul className='px-4 flex text-white text-2xl my-8'>
-            <li className='px-4'>Test</li>
-            <li className='px-4'>Test</li>
-            <li className='px-4'>Test</li>
+        <ul className='px-4 flex text-white text-2xl mb-8 items-center'>
+            <li onClick={((e)=>{setActiveLink(e.target.text)})} className={`px-4 py-8 ${activeLink==='Home'&&'text-black bg-white'}`}><Link to="/">Home</Link></li>
+            <li onClick={((e)=>{setActiveLink(e.target.text)})} className={`px-4 py-8 ${activeLink==='Login'&&'text-black bg-white'}`}><Link to="/signin">Login</Link></li>
         </ul>
         
 
