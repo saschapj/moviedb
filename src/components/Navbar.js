@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
 
 const Navbar = () => {
 
@@ -27,30 +28,30 @@ useEffect(()=>{
 },[searchTitle])
 
   return (
-    <div className='w-full bg-white flex justify-between'>
+    <div className='w-full  flex justify-between'>
         
-        <div >
-        <ul className='text-black px-4 flex'>
+        
+        <ul className='px-4 flex text-white text-2xl my-8'>
             <li className='px-4'>Test</li>
             <li className='px-4'>Test</li>
             <li className='px-4'>Test</li>
         </ul>
-        </div>
+        
 
-        <div >            
-            <input onFocus={()=>{setInputFocus(true)}} onBlur={()=>{setTimeout(()=>{setInputFocus(false)},1000)}} className='text-black' placeholder='suchen...' onChange={(e)=>{
+        <div className='my-8 text-2xl' >            
+            <input onFocus={()=>{setInputFocus(true)}} onBlur={()=>{setTimeout(()=>{setInputFocus(false)},1000)}} className='bg-black placeholder-white border-2 border-dashed border-white' placeholder='suchen...' onChange={(e)=>{
                 setSearchTitle(e.target.value)
                 
                 }}/>
 
             {inputFocus&&
 
-                <ul className='text-black bg-gray-100 w-full absolute'>
+                <ul className='text-black bg-gray-100 w-full absolute border-2'>
           
             {movies.map((movie)=>{
                 return(
                     
-                    <li key={movie.id} className='hover:bg-gray-300 cursor-pointer'><Link to={`/movie/${movie.id}`}>{movie.title}</Link> </li>
+                    <li key={movie.id} className='hover:bg-white cursor-pointer bg-black text-white hover:text-black p-2 '><Link to={`/movie/${movie.id}`}>{movie.title}</Link> </li>
                     )
                 })}
             

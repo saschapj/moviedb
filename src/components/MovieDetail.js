@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { addDoc, collection, getDocs } from "firebase/firestore"; 
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore"; 
 import {db} from "../Firebase/Firebase-config"
 import { FaPlus } from 'react-icons/fa';
 
@@ -9,10 +9,12 @@ const MovieDetail = () => {
 
     const [movie,setMovie] = useState([]);
     const [ownMovie,setOwnMovie] = useState(false);
+    const [ownMovieId,setOwnMovieId] = useState(-1);
     
     
     //options here
 
+    
   
   const imageURL =`https://image.tmdb.org/t/p/original${movie.backdrop_path}`
   
@@ -34,7 +36,7 @@ const MovieDetail = () => {
     
     useEffect(()=>{      
       getOwnMovies();
-
+      getOwnMovieId();
     },[movie])
     
     
@@ -42,14 +44,37 @@ const MovieDetail = () => {
       const querySnapshot = await getDocs(collection(db, "movies"));      
       let movieOwned = false;
         querySnapshot.forEach((doc) => {
-          
+
             if(movie.id==doc.data().tmdbid) {        
               movieOwned=true;
               
             } 
         });
         setOwnMovie(movieOwned)
-    }        
+    }
+
+    const getOwnMovieId = async () =>{
+
+      const querySnapshot = await getDocs(collection(db, "movies"));            
+        querySnapshot.forEach((doc) => {
+
+            if(movie.id==doc.data().tmdbid) {        
+              setOwnMovieId(doc.id)
+            } 
+        });        
+    }
+
+
+    const deleteMovie = async (idToDelete) => {
+      try{
+
+        await deleteDoc(doc(db, "movies", idToDelete));
+        setOwnMovie(false);
+      }catch(e){
+        console.log(e);
+      }
+
+    }
     
     const addMovie = async (tmdbid) => {        
       try {
@@ -63,6 +88,7 @@ const MovieDetail = () => {
   }
 }
 
+
       return (
         
   <div>
@@ -73,7 +99,7 @@ const MovieDetail = () => {
          
          {
            ownMovie?           
-           <button onClick={()=>{setOwnMovie(!ownMovie)}} className='p-4 m-2 flex border-2 min-w-[13rem] border-white text-black bg-white uppercase  hover:cursor-pointer'>{<FaPlus className=' pr-2 text-2xl '/>}Film im Besitz</button>
+           <button onClick={()=>{deleteMovie(ownMovieId)}} className='p-4 m-2 flex border-2 min-w-[13rem] border-white text-black bg-white uppercase  hover:cursor-pointer'>{<FaPlus className=' pr-2 text-2xl '/>}Film im Besitz</button>
            :
            <button onClick={()=>{addMovie(movie.id)}} className='p-4 m-2 flex border-2 min-w-[13rem] uppercase   hover:cursor-pointer'>{<FaPlus className='pr-2 text-2xl  '/>}Film Hinzufügen</button>                      
            

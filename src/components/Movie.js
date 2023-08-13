@@ -6,7 +6,7 @@ const Movie = ({moviesFromApi}) => {
   
 
   return (
-    <ul className='flex'>
+    <ul className='flex flex-wrap'>
     {  moviesFromApi.map((movie)=>{
       
       return (
