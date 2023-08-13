@@ -1,3 +1,9 @@
+#How to test
+1. create an account at themoviedb.org.
+2. open the api and make any call (they give examples on the page)
+3. copy the options variable and paste it into the code where you find the comment //options here (Navbar.js/Home.js/MovieDetails.js)
+4. install/run like any regular react app.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
