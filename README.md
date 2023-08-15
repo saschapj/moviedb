@@ -4,6 +4,11 @@
 3. copy the options variable and paste it into the code where you find the comment //options here (Navbar.js/Home.js/MovieDetails.js)
 4. install/run like any regular react app.
 
+planned refactoring:
+use context for db
+check api calls for possibly unnecessary repetition of code
+fix bug concerning navbar
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
