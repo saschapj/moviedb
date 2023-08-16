@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { tmdboptions } from "../Api/Tmdb";
 
 const Navbar = () => {
   const [movies, setMovies] = useState([2]);
@@ -8,6 +9,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
 
   //options here
+const options = tmdboptions;
 
   const getMoviesFromApi = (searchTitle) => {
     fetch(

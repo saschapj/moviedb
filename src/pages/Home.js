@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { auth, db } from "../Firebase/Firebase-config";
 import Movie from "../components/Movie";
 import { onAuthStateChanged } from "firebase/auth";
+import {tmdboptions} from "../Api/Tmdb";
 
 const Home = () => {
   const [moviesFromDb, setMoviesFromDb] = useState([]);
@@ -35,6 +36,7 @@ const Home = () => {
   };
 
   //options here
+  const options = tmdboptions ;
 
   const getMoviesFromApi = (id) => {
     fetch(`https://api.themoviedb.org/3/movie/${id}`, options)

@@ -10,6 +10,7 @@ import {
 import { auth, db } from "../Firebase/Firebase-config";
 import { FaPlus } from "react-icons/fa";
 import { onAuthStateChanged } from "firebase/auth";
+import { tmdboptions } from "../Api/Tmdb";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -36,7 +37,8 @@ const MovieDetail = () => {
   });
 
   //options here
-
+  const options = tmdboptions
+  
   const imageURL = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
   const getMoviesFromApi = (id) => {
