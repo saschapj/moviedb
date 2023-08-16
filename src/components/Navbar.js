@@ -73,7 +73,7 @@ const Navbar = () => {
         />
 
         {inputFocus && (
-          <ul className="text-black bg-gray-100 w-full absolute border-2">
+          <ul className="text-black bg-gray-100 absolute border-2">
             {movies.map((movie) => {
               return (
                 <li
