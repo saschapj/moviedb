@@ -2,7 +2,9 @@
 1. create an account at themoviedb.org.
 2. open the api and make any call (they give examples on the page)
 3. copy the options variable and paste it into the code where you find the comment //options here (Navbar.js/Home.js/MovieDetails.js)
-4. install/run like any regular react app.
+4. Inside the project, create a folder called Firebase and inside there, create a file called Firebase-config.js /Firebase/Firebase-config
+5. create a firebase database called movies and copy the config from google into the file
+6. install/run like any regular react app.
 
 planned refactoring:
 use context for db
