@@ -34,7 +34,7 @@ const options = tmdboptions;
 
   return (
     <div className="w-full  flex justify-between">
-      <ul className="px-4 flex text-white text-2xl mb-8 items-center">
+      <ul className="px-4 flex text-white text-2xl mb-8 items-center ">
         <li
           onClick={(e) => {
             setActiveLink(e.target.text);
@@ -43,7 +43,7 @@ const options = tmdboptions;
             activeLink === "Home" && "text-black bg-white"
           }`}
         >
-          <Link to="/">Home</Link>
+          <Link className="hover:text-gray-300 transition" to="/">Home</Link>
         </li>
         <li
           onClick={(e) => {
@@ -53,7 +53,7 @@ const options = tmdboptions;
             activeLink === "Login" && "text-black bg-white"
           }`}
         >
-          <Link to="/signin">Login</Link>
+          <Link className="hover:text-gray-300 transition" to="/signin">Login</Link>
         </li>
       </ul>
 
@@ -80,7 +80,7 @@ const options = tmdboptions;
               return (
                 <li
                   key={movie.id}
-                  className="hover:bg-white cursor-pointer bg-black text-white hover:text-black p-2 "
+                  className="cursor-pointer bg-black text-white p-2"
                 >
                   <Link to={`/movie/${movie.id}`}>{movie.title}</Link>{" "}
                 </li>

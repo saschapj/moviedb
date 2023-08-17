@@ -84,6 +84,7 @@ const MovieDetail = () => {
       await deleteDoc(doc(db, "movies", idToDelete));
       setOwnMovie(false);
     } catch (e) {
+      alert('Bitte einloggen')
       console.log(e);
     }
   };
@@ -96,6 +97,8 @@ const MovieDetail = () => {
       console.log(`Document written with ID: ${tmdbid}`);
       setOwnMovie(true);
     } catch (e) {
+      alert('Bitte einloggen')
+      console.log('test')
       console.error("Error adding document: ", e);
     }
   };
